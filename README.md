@@ -2,9 +2,11 @@
 fail2ban to mysql
 
 put mlocaldb.conf into /etc/fail2ban/action.d/
+
 put kci_log.php and kci_logread.php into any user apache html public directory that accesssible via browser. 
 
 edit your /etc/fail2ban/jail.conf and add a line to use mlocaldb at the end of action, for example:
+
 ...
 [sshd]
 port    = ssh
