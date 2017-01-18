@@ -14,6 +14,10 @@ logdate datetime
 logipv4 int(11)
 logmsg varchar(1000)
 kci_category int(11) 
+id int(11)
+codecontinent char(2)
+codecountry2 char(2)
+codecountry3 char(3)
 
 table: kci_category
 id int(11)
@@ -86,6 +90,7 @@ if ($res) {
 	<th>Datetime</th>
 	<th>IP</th>
 	<th>Country</th>
+	<th>Code</th>
 	<th>Category</th>
 	<th>Comment</th>
 </tr>
@@ -106,6 +111,7 @@ if ($res) {
 	<td valign="top"><?php echo $row['logdate']; ?></td>
 	<td valign="top" align="center"><?php echo long2ip($row['logipv4']); ?></td>
 	<td valign="top" align="center"><?php echo geoip_country_name_by_name(long2ip($row['logipv4'])); ?></td>
+	<td valign="top" align="center"><?php echo $row['codecontinent']."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
 	<td valign="top"><?php echo $row['category']; ?></td>
 	<td valign="top"><?php echo $logmsg; ?></td>
 </tr>
