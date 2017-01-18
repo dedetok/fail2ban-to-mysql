@@ -1,7 +1,7 @@
 # fail2ban-to-mysql
 fail2ban to mysql
 
-require
+requirement:
 
 1. fail2ban (tested on 0.9.5-1)
 
