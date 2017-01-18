@@ -30,6 +30,9 @@ CREATE TABLE `kci_logipv4` (
   `logmsg` varchar(1000) DEFAULT NULL,
   `kci_category` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codecontinent` char(2),
+  `codecountry2` char(2), 
+  `codecountry3` char(3),
   PRIMARY KEY (`id`),
   KEY `fk_kci_category` (`kci_category`),
   CONSTRAINT `kci_logipv4_ibfk_2` FOREIGN KEY (`kci_category`) REFERENCES `kci_category` (`id`)
