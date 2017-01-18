@@ -5,7 +5,7 @@ if ($_SERVER['SERVER_ADDR'] != $_SERVER['REMOTE_ADDR']){
 }
 
 // Open Source
-// Write by: IGAM Muliarsa 2016-10-17
+// Write by: IGAM Muliarsa 2017-01-18
 // For Education Purpose 
 // Use it with your own risk
 // No Support
@@ -17,6 +17,10 @@ logdate datetime
 logipv4 int(11)
 logmsg varchar(1000)
 kci_category int(11) 
+id int(11)
+codecontinent char(2)
+codecountry2 char(2)
+codecountry3 char(3)
 
 table: kci_category
 id int(11)
@@ -53,6 +57,10 @@ if ($mysqli->connect_errno) {
 
 $logipv4;
 $logmsg;
+$codecontinent="";
+$codecountry2="";
+$codecountry3="";
+
 $isprocess = false;
 $kci_category=10; // initialize category
 $userip = ip2long($_SERVER['REMOTE_ADDR']); // we store it in long, that's why we convert it
@@ -62,8 +70,11 @@ $error_msg = "not Process: Parameters input not valid -end- \n";
 if (isset($_POST["logipv4"]) && isset($_POST["logmsg"]) && isset($_POST["category"]))
 {
 	$isprocess = true;
-	$logipv4 = ip2long($_POST["logipv4"]); //sanitize
-	$logmsg = $_POST["logmsg"]; // sanitize latter
+	$hostip=$_POST["logipv4"];
+	$codecontinent=geoip_continent_code_by_name($hostip);
+	$codecountry2=geoip_country_code_by_name($hostip);
+	$codecountry3=geoip_country_code3_by_name($hostip);
+	$logipv4 = ip2long($hostip); //sanitize	$logmsg = $_POST["logmsg"]; // sanitize latter
 	$kci_category = intval($_POST["category"]); // sanitize
 }
 
@@ -71,7 +82,11 @@ if (isset($_POST["logipv4"]) && isset($_POST["logmsg"]) && isset($_POST["categor
 if (isset($_GET["logipv4"]) && isset($_GET["logmsg"]) && isset($_GET["category"]))
 {
 	$isprocess = true;
-	$logipv4 = ip2long($_GET["logipv4"]); // sanitize
+	$hostip=$_GET["logipv4"];
+	$codecontinent=geoip_continent_code_by_name($hostip);
+	$codecountry2=geoip_country_code_by_name($hostip);
+	$codecountry3=geoip_country_code3_by_name($hostip);
+	$logipv4 = ip2long($hostip); //sanitize
 	$logmsg = $_GET["logmsg"]; // sanitize latter
 	$kci_category = intval($_GET["category"]); // sanitize
 }
@@ -112,7 +127,7 @@ if ($isprocess) {
 		$logmsg = $mysqli->escape_string($logmsg); // sanitize
 		echo "Insert \n";
 		echo "matches: $logmsg \n";
-		$sql = "INSERT INTO kci_logipv4(logdate, logipv4, logmsg, kci_category) VALUES ('".$curdatetime->format('Y-m-d H:i:s')."', ".$logipv4.", '".$logmsg."', ".$kci_category.");";
+		$sql = "INSERT INTO kci_logipv4(logdate, logipv4, logmsg, kci_user, kci_category, codecontinent, codecountry2, codecountry3) VALUES ('".$curdatetime->format('Y-m-d H:i:s')."', ".$logipv4.", '".$logmsg."', ".$kci_user.", ".$kci_category.", '".$codecontinent."', '".$codecountry2."', '".$codecountry3."' );";
 		if (!$mysqli->query($sql)) {
 			$isprocess = false;
 			$error_msg = "insert error: fail insert -end- \n";
