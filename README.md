@@ -7,11 +7,11 @@ requirement:
 
 2. ipset
 
-3. mysql
+3. mysql (tested on 5.5)
 
-4. apache
+4. apache2
 
-5. php (test on 5.6)
+5. php (tested on 5.6)
 
 6. Geoip (geoip-bin geoip-database geoip-database-extra)
 
@@ -39,6 +39,8 @@ action = iptables-ipset-proto4[name=sshd]
 
 mlocaldb[category=10]
 
+
+
 abuseipdb[category=4,18,22] 
 
 ...
@@ -57,4 +59,3 @@ id	category
 30	HTTP/HTTPS
 
 40	SMTP/POP/IMAP/POP3/S
-
