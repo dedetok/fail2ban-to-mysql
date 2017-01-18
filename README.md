@@ -1,6 +1,20 @@
 # fail2ban-to-mysql
 fail2ban to mysql
 
+require
+
+1. fail2ban (tested on 0.9.5-1)
+
+2. ipset
+
+3. mysql
+
+4. apache
+
+5. php (test on 5.6)
+
+6. Geoip (geoip-bin geoip-database geoip-database-extra)
+
 put mlocaldb.conf into /etc/fail2ban/action.d/
 
 put kci_log.php and kci_logread.php into any user apache html public directory that accesssible via browser. 
