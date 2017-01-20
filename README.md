@@ -3,21 +3,20 @@ fail2ban to mysql
 
 requirement:
 
-1. fail2ban (tested on 0.9.5-1)
+fail2ban (tested on 0.9.5-1)
 
-2. ipset
+ipset
 
-3. mysql (tested on 5.5)
+mysql (tested on 5.5)
 
-4. apache2
+apache2
 
-5. php (tested on 5.6)
+php (tested on 5.6)
 
-6. Geoip (geoip-bin geoip-database geoip-database-extra)
-
+Geoip (geoip-bin geoip-database geoip-database-extra)
 put mlocaldb.conf into /etc/fail2ban/action.d/
 
-create a new mysql database and it's user to store fail2ban log (you can use kci.sql as references). 
+create a new mysql database and it's user to store fail2ban log (you can use kci.sql as references).
 
 put kci_log.php and kci_logread.php into any user apache html public directory that accesssible via browser. You need to change user name and password to access mysql database. Feel free to use and modify it.
 
@@ -27,7 +26,7 @@ edit your /etc/fail2ban/jail.conf and add a line to use mlocaldb at the end of a
 
 [sshd]
 
-port    = ssh
+port = ssh
 
 logpath = %(sshd_log)s
 
@@ -41,21 +40,48 @@ action = iptables-ipset-proto4[name=sshd]
 
 mlocaldb[category=10]
 
-abuseipdb[category=4,18,22] 
+abuseipdb[category=4,18,22]
 
 ...
 
-
-restart your fail2ban 
+restart your fail2ban
 
 category list:
 
-id	category
+id category
 
-10 	SSH
+10 SSH
 
-20 	FTP
+20 FTP
 
-30	HTTP/HTTPS
+30 HTTP/HTTPS
 
-40	SMTP/POP/IMAP/POP3/S
+40 SMTP/POP/IMAP/POP3/S
+
+ipset list:
+
+mynetrules hash:net
+
+mynetrulesssh hash:net
+
+mynetruleshttp hash:net
+
+mynetrulesftp hash:net
+
+mynetrulessmtp hash:net
+
+iptables rules:
+
+-A INPUT -m set --match-set mynetrules src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 25,465,993,995,465,143,110 -m set --match-set mynetrulessmtp src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 80,443 -m set --match-set mynetruleshttp src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 22 -m set --match-set mynetrulesssh src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 21,22 -m set --match-set mynetrulesftp src -j DROP
+
+java/src/igam contains java program to add ip from mysql into permanent ipset blocked list.
+
+add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.jar
