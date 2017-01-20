@@ -127,7 +127,7 @@ if ($isprocess) {
 		$logmsg = $mysqli->escape_string($logmsg); // sanitize
 		echo "Insert \n";
 		echo "matches: $logmsg \n";
-		$sql = "INSERT INTO kci_logipv4(logdate, logipv4, logmsg, kci_user, kci_category, codecontinent, codecountry2, codecountry3) VALUES ('".$curdatetime->format('Y-m-d H:i:s')."', ".$logipv4.", '".$logmsg."', ".$kci_user.", ".$kci_category.", '".$codecontinent."', '".$codecountry2."', '".$codecountry3."' );";
+		$sql = "INSERT INTO kci_logipv4(logdate, logipv4, logmsg, kci_category, codecontinent, codecountry2, codecountry3) VALUES ('".$curdatetime->format('Y-m-d H:i:s')."', ".$logipv4.", '".$logmsg."', ".$kci_category.", '".$codecontinent."', '".$codecountry2."', '".$codecountry3."' );";
 		if (!$mysqli->query($sql)) {
 			$isprocess = false;
 			$error_msg = "insert error: fail insert -end- \n";
