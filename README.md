@@ -1,4 +1,7 @@
 # fail2ban-to-mysql
+
+http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-into-mysql-and-show-it 
+
 fail2ban to mysql
 
 requirement:
