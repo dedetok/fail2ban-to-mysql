@@ -1,14 +1,97 @@
-### Welcome to GitHub Pages.
-This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here [using GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/), select a template crafted by a designer, and publish. After your page is generated, you can check out the new `gh-pages` branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.
+### fail2ban-to-mysql
+PHP
+JAVA
+Language: PHP and Java
 
-### Designer Templates
-We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.
+### External site
+http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-into-mysql-and-show-it
 
-### Creating pages manually
-If you prefer to not use the automatic generator, push a branch named `gh-pages` to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.
+### fail2ban to mysql
 
-### Authors and Contributors
-You can @mention a GitHub username to generate a link to their profile. The resulting `<a>` element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (@defunkt), PJ Hyett (@pjhyett), and Tom Preston-Werner (@mojombo) founded GitHub.
+### requirement:
 
-### Support or Contact
-Having trouble with Pages? Check out our [documentation](https://help.github.com/pages) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+fail2ban (tested on 0.9.5-1)
+
+ipset
+
+mysql (tested on 5.5)
+
+apache2
+
+php (tested on 5.6)
+
+Geoip (geoip-bin geoip-database geoip-database-extra) put mlocaldb.conf into /etc/fail2ban/action.d/
+
+### mysql 
+create a new mysql database and it's user to store fail2ban log (you can use kci.sql as references).
+
+### php
+put kci_log.php and kci_logread.php into any user apache html public directory that accesssible via browser. You need to change user name and password to access mysql database. Feel free to use and modify it.
+
+### fail2ban config
+edit your /etc/fail2ban/jail.conf and add a line to use mlocaldb at the end of action, for example:
+
+...
+
+[sshd]
+
+port = ssh
+
+logpath = %(sshd_log)s
+
+backend = %(sshd_backend)s
+
+enabled = true
+
+filter = sshd
+
+action = iptables-ipset-proto4[name=sshd]
+
+mlocaldb[category=10]
+
+abuseipdb[category=4,18,22]
+
+...
+
+restart your fail2ban
+
+### category list:
+
+id category
+
+10 SSH
+
+20 FTP
+
+30 HTTP/HTTPS
+
+40 SMTP/POP/IMAP/POP3/S
+
+### ipset list:
+
+mynetrules hash:net
+
+mynetrulesssh hash:net
+
+mynetruleshttp hash:net
+
+mynetrulesftp hash:net
+
+mynetrulessmtp hash:net
+
+### iptables rules:
+
+-A INPUT -m set --match-set mynetrules src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 25,465,993,995,465,143,110 -m set --match-set mynetrulessmtp src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 80,443 -m set --match-set mynetruleshttp src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 22 -m set --match-set mynetrulesssh src -j DROP
+
+-A INPUT -p tcp -m multiport --dports 21,22 -m set --match-set mynetrulesftp src -j DROP
+
+### Java
+java/src/igam contains java program to add ip from mysql into permanent ipset blocked list.
+
+add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.jar
