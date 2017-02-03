@@ -1,5 +1,5 @@
 <?php 
-$lastphpupdate = "last update 2016-10-17 12:00 \n"; // info last update php 
+$lastphpupdate = "last update 2017-02-03 09:40 \n"; // info last update php 
 
 // Open Source
 // Write by: IGAM Muliarsa 2016-10-17
@@ -29,6 +29,27 @@ category varchar(20)
 | 40 | SMTP/POP/IMAP/POP3/S |  
 
 */
+
+/* continent code
+AF	Africa
+AN	Antarctica
+AS	Asia
+EU	Europe
+NA	North america
+OC	Oceania
+SA	South america
+http://php.net/manual/en/function.geoip-continent-code-by-name.php
+*/
+
+$continent = array(
+	"AF" => "Africa",
+	"AN" => "Antarctica",
+	"AS" => "Asia",
+	"EU" => "Europe",
+	"NA" => "North America",
+	"OC" => "Oceania",
+	"SA" => "South America"
+);
 
 // change user and password with your
 // host, user, password, database, [port]
@@ -110,8 +131,8 @@ if ($res) {
 	<td valign="top"><?php echo $line_no; ?></td>
 	<td valign="top"><?php echo $row['logdate']; ?></td>
 	<td valign="top" align="center"><?php echo long2ip($row['logipv4']); ?></td>
-	<td valign="top" align="center"><?php echo geoip_country_name_by_name(long2ip($row['logipv4'])); ?></td>
-	<td valign="top" align="center"><?php echo $row['codecontinent']."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
+	<td valign="top" align="center"><?php echo geoip_country_name_by_name(long2ip($row['logipv4']))."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
+	<td valign="top" align="center"><?php echo $continent[$row['codecontinent']]; ?></td>
 	<td valign="top"><?php echo $row['category']; ?></td>
 	<td valign="top"><?php echo $logmsg; ?></td>
 </tr>
