@@ -1,7 +1,7 @@
 ### fail2ban-to-mysql
 PHP
+
 JAVA
-Language: PHP and Java
 
 ### External site
 http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-into-mysql-and-show-it
@@ -9,7 +9,6 @@ http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-
 ### fail2ban to mysql
 
 ### requirement:
-
 fail2ban (tested on 0.9.5-1)
 
 ipset
@@ -56,7 +55,6 @@ abuseipdb[category=4,18,22]
 restart your fail2ban
 
 ### category list:
-
 id category
 
 10 SSH
@@ -68,7 +66,6 @@ id category
 40 SMTP/POP/IMAP/POP3/S
 
 ### ipset list:
-
 mynetrules hash:net
 
 mynetrulesssh hash:net
@@ -80,7 +77,6 @@ mynetrulesftp hash:net
 mynetrulessmtp hash:net
 
 ### iptables rules:
-
 -A INPUT -m set --match-set mynetrules src -j DROP
 
 -A INPUT -p tcp -m multiport --dports 25,465,993,995,465,143,110 -m set --match-set mynetrulessmtp src -j DROP
