@@ -7,6 +7,8 @@ $lastphpupdate = "last update 2017-02-04 09:40 \n"; // info last update php
 // Use it with your own risk
 // No Support
 
+// flags from http://www.famfamfam.com/lab/icons/flags/
+
 /*
 database: myf2b
 table: kci_logipv4
