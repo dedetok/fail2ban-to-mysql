@@ -1,5 +1,5 @@
 <?php 
-$lastphpupdate = "last update 2017-02-03 09:40 \n"; // info last update php 
+$lastphpupdate = "last update 2017-02-04 09:40 \n"; // info last update php  
 
 // Open Source
 // Write by: IGAM Muliarsa 2016-10-17
@@ -94,7 +94,7 @@ $line_no=$start;
 
 <html>
 <body>
-<p>Komunitas Cyber Indonesia</p>
+<p>Komunitas Cyber Indonesia <img src="./png/id.png" /></p>
 <p>Version: Testing</p>
 <p><?php echo $lastphpupdate; // print last update php  ?></p>
 <p>Server Farm Info</p>
@@ -125,13 +125,14 @@ if ($res) {
 			$logmsg=strip_tags($logmsg);
 			$logmsg=htmlspecialchars($logmsg);
 			$logmsg=nl2br($logmsg);
+			$fnameflag="./png/".strtolower($row['codecountry2']).".png";			
 ?>
 
 <tr>
 	<td valign="top"><?php echo $line_no; ?></td>
 	<td valign="top"><?php echo $row['logdate']; ?></td>
 	<td valign="top" align="center"><?php echo long2ip($row['logipv4']); ?></td>
-	<td valign="top" align="center"><?php echo geoip_country_name_by_name(long2ip($row['logipv4']))."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
+	<td valign="top" align="center"><?php echo "<img src=\"".$fnameflag."\" />"; ?><?php echo geoip_country_name_by_name(long2ip($row['logipv4']))."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
 	<td valign="top" align="center"><?php echo $continent[$row['codecontinent']]; ?></td>
 	<td valign="top"><?php echo $row['category']; ?></td>
 	<td valign="top"><?php echo $logmsg; ?></td>
@@ -177,5 +178,6 @@ if ($res) {
 <p>Hosted on <a href="http://www.aryfanet.com/">Aryfanet Dot Com</a>, your partner to trust.</p>
 <p>This product includes GeoLite2 data created by MaxMind, available from
 <a href="http://www.maxmind.com">http://www.maxmind.com</a>.</p>
+<p>Flags from <a href="http://www.famfamfam.com/lab/icons/flags/">http://www.famfamfam.com/lab/icons/flags/</a>.</p>
 </body>
 </html> 
