@@ -132,7 +132,7 @@ if ($res) {
 	<td valign="top"><?php echo $line_no; ?></td>
 	<td valign="top"><?php echo $row['logdate']; ?></td>
 	<td valign="top" align="center"><?php echo long2ip($row['logipv4']); ?></td>
-	<td valign="top" align="center"><?php echo "<img src=\"".$fnameflag."\" />"; ?><?php echo geoip_country_name_by_name(long2ip($row['logipv4']))."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
+	<td valign="top" align="center"><?php echo "<img src=\"".$fnameflag."\" />"; ?> <?php echo geoip_country_name_by_name(long2ip($row['logipv4']))."-".$row['codecountry2']."/".$row['codecountry3']; ?></td>
 	<td valign="top" align="center"><?php echo $continent[$row['codecontinent']]; ?></td>
 	<td valign="top"><?php echo $row['category']; ?></td>
 	<td valign="top"><?php echo $logmsg; ?></td>
