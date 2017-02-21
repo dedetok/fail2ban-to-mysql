@@ -47,7 +47,8 @@ if ($rows >0) {
 		<th>Category</th>
 		<th>Number</th>
 	</tr>
-<?php 
+<?php
+	$line_no=0;
 	while ($row = $res->fetch_assoc()) {
 		$line_no++; // numbering
 		// sanitize output
