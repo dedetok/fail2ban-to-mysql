@@ -37,3 +37,11 @@ CREATE TABLE `kci_logipv4` (
   KEY `fk_kci_category` (`kci_category`),
   CONSTRAINT `kci_logipv4_ibfk_2` FOREIGN KEY (`kci_category`) REFERENCES `kci_category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+--
+-- View structure for table `kci_view_by_month_year`
+--
+CREATE 
+VIEW kci_view_by_month_year
+AS
+SELECT YEAR(`kci_logipv4`.`logdate`) AS `kci_year`,MONTH(`kci_logipv4`.`logdate`) AS `kci_month`,`kci_logipv4`.`kci_category` AS `kci_category`, COUNT(`kci_logipv4`.`id`) AS `kci_count` FROM `kci_logipv4` GROUP BY YEAR(`kci_logipv4`.`logdate`),MONTH(`kci_logipv4`.`logdate`),`kci_logipv4`.`kci_category`
