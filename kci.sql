@@ -45,3 +45,11 @@ CREATE
 VIEW kci_view_by_month_year
 AS
 SELECT YEAR(`kci_logipv4`.`logdate`) AS `kci_year`,MONTH(`kci_logipv4`.`logdate`) AS `kci_month`,`kci_logipv4`.`kci_category` AS `kci_category`, COUNT(`kci_logipv4`.`id`) AS `kci_count` FROM `kci_logipv4` GROUP BY YEAR(`kci_logipv4`.`logdate`),MONTH(`kci_logipv4`.`logdate`),`kci_logipv4`.`kci_category`
+
+--
+-- View structure for table `kci_view_by_date_month_year`
+--
+CREATE 
+VIEW kci_view_by_date_month_year
+AS
+SELECT YEAR(`kci_logipv4`.`logdate`) AS `kci_year`, MONTH(`kci_logipv4`.`logdate`) AS `kci_month`,  DAYOFMONTH(`kci_logipv4`.`logdate`) AS `kci_date`, `kci_logipv4`.`kci_category` AS `kci_category`, COUNT(`kci_logipv4`.`id`) AS `kci_count` FROM `kci_logipv4` GROUP BY YEAR(`kci_logipv4`.`logdate`),MONTH(`kci_logipv4`.`logdate`),DAYOFMONTH(`kci_logipv4`.`logdate`), `kci_logipv4`.`kci_category`
