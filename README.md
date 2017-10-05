@@ -4,7 +4,7 @@ PHP
 JAVA
 
 ### Web Page
-http://garasiku.web.id
+http://www.garasiku.web.id/web/kci/kci_logread.php
 
 fail2ban to mysql
 
