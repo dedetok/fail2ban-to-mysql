@@ -4,7 +4,7 @@ PHP
 JAVA
 
 ### Web Page
-http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-into-mysql-and-show-it 
+http://garasiku.web.id
 
 fail2ban to mysql
 
