@@ -25,7 +25,7 @@ put mlocaldb.conf into /etc/fail2ban/action.d/
 
 ### Install php7.0 
 
-pt-get install php7.0 php7.0-geoip geoip-bin geoip-database geoip-database-extra libapache2-mod-geoip
+apt-get install php7.0 php7.0-geoip geoip-bin geoip-database geoip-database-extra libapache2-mod-geoip
 
 ### mysql
 create a new mysql database and it's user to store fail2ban log (you can use kci.sql as references).
