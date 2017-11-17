@@ -1,4 +1,7 @@
 <?php 
+session_start();
+define("kci",1);
+
 /*
 CREATE 
 VIEW kci_view_by_month_year
@@ -32,11 +35,9 @@ $rows = $res->num_rows;
 <head>
 </head>
 <body>
-<p>Komunitas Cyber Indonesia <img src="./png/id.png" /></p>
-<p>Version: Alpa</p>
-<p><?php echo $lastphpupdate; // print last update php  ?></p>
-<p>Server Farm Info</p>
 <?php 
+// body header 
+include_once("./kci_body_header.php");
 if ($rows >0) {
 ?>
 	<table border="1">
@@ -87,6 +88,8 @@ if ($rows >0) {
 } else {
 	echo "<p>No Data</p>";
 }
+// body bottom 
+include_once("./kci_body_bottom.php");
 ?>
 </body>
 </html>
