@@ -99,17 +99,13 @@ $line_no=$start;
 
 <html>
 <body>
-<p>Komunitas Cyber Indonesia <img src="./png/id.png" /></p>
-<p>Version: Testing</p>
-<p><?php echo $lastphpupdate; // print last update php  ?></p>
-<p>Server Farm Info</p>
-
 <?php
+// body header 
+include_once("./kci_body_header.php");
 if ($res) {
 	echo "<p>Total: $total</p>";
 	if ($rows>0) {
 ?>
-
 <table border="1">
 <tr>
 	<th>No</th>
@@ -179,10 +175,10 @@ if ($res) {
 } else {
 	echo "<p>Query Fail</p>";
 }
+// body bottom 
+include_once("./kci_body_bottom.php");
+
 ?>
-<p>Hosted on <a href="http://www.aryfanet.com/">Aryfanet Dot Com</a>, your partner to trust.</p>
-<p>This product includes GeoLite2 data created by MaxMind, available from
-<a href="http://www.maxmind.com">http://www.maxmind.com</a>.</p>
-<p>Flags from <a href="http://www.famfamfam.com/lab/icons/flags/">http://www.famfamfam.com/lab/icons/flags/</a>.</p>
+
 </body>
 </html> 
