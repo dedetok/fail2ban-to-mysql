@@ -1,4 +1,7 @@
 <?php 
+session_start();
+define("kci",1);
+
 $lastphpupdate = "last update 2017-02-04 09:40 \n"; // info last update php  
 
 // Open Source
