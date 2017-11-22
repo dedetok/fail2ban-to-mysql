@@ -88,7 +88,15 @@ mynetrulessmtp hash:net
 ### Java
 java/src/igam contains java program to add ip from mysql into permanent ipset blocked list.
 
-add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.jar
+Create jar
+
+# jar cvfm F2BBlock.jar ./igam/MANIFEST.MF ./igam/*.class
+
+# jar cvfm F2BBlock.java9.jar ./igam/MANIFEST.MF ./igam/*.class
+
+add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.jar 
+
+add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.java9.jar 
 
 ### flag
 download flag from http://www.famfamfam.com/lab/icons/flags/ 
