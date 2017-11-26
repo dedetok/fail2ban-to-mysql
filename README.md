@@ -86,17 +86,44 @@ mynetrulessmtp hash:net
 -A INPUT -p tcp -m multiport --dports 21,22 -m set --match-set mynetrulesftp src -j DROP
 
 ### Java
-java/src/igam contains java program to add ip from mysql into permanent ipset blocked list.
+java/src/igam contains java program to add ip from mysql into permanent ipset blocked list. 
 
-Create jar
 
-# jar cvfm F2BBlock.jar ./igam/MANIFEST.MF ./igam/*.class
+create folder igam and put all files into that folder. for example
 
-# jar cvfm F2BBlock.java9.jar ./igam/MANIFEST.MF ./igam/*.class
+ls /root/igam/
 
-add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.jar 
+BlockIP.class  BriefFormatter.class  IPFromMySQL.class  RunCmd.class
 
-add this java into cron tables /usr/bin/java -jar /root/java/F2BBlock.java9.jar 
+BlockIP.java   BriefFormatter.java   IPFromMySQL.java   RunCmd.java
+
+
+Compile
+
+# javac ./igam/*.java
+
+
+To Run
+
+
+# java igam.BlockIP
+
+
+create bash file to make the java easier to run runblockip.sh 
+
+#!/bin/bash
+
+cd /root/
+
+/usr/bin/java igam.BlockIP
+
+
+add this java into cron tables /root/runblockip.sh > /root/runblockip.log 
+
+NOTE: You need to install libmysql-java!
+
+Tested on OpenJDK 8 & 9
+
 
 ### flag
 download flag from http://www.famfamfam.com/lab/icons/flags/ 
