@@ -4,7 +4,7 @@ PHP
 JAVA
 
 ### External site
-http://garasiku.web.id/web/joomla/index.php/security/117-fail2ban-save-your-log-into-mysql-and-show-it
+https://www.garasiku.web.id/web/joomla/index.php/tips/security/66-fail2ban-save-your-log-into-mysql-and-show-it
 
 ### requirement:
 fail2ban (tested on 0.9.5-1)
