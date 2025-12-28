@@ -3,8 +3,6 @@ PHP
 
 JAVA
 
-### External site
-
 ### requirement:
 fail2ban (tested on 0.9.5-1)
 
